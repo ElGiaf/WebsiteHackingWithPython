@@ -1,0 +1,55 @@
+
+# database aufmachen
+create database musikdb;
+
+# show database;
+show databases;
+
+# create table mit namen user
+create table user(id int not null auto_increment, primary key(id));
+alter table user add column username varchar(30) not null;
+alter table user add column email_address varchar(50) not null;
+alter table user add column password varchar(60) not null;
+
+create table artists(id int not null auto_increment, primary key(id));
+alter table artists add column name varchar(30);
+alter table artists add column picture varchar(100);
+alter table artists add column infoText varchar(500);
+
+create table events(id int not null auto_increment, primary key(id));
+alter table event add column name varchar(30) not null;
+alter table event add column logo varchar(100) not null;
+alter table event add column startDate date not null;
+alter table event add column endDate date default null;
+alter table event add column infoText varchar(500) default null;
+
+
+CREATE TABLE Veranstaltung(
+    VID integer PRIMARY KEY,
+    name TEXT not null,
+    Logo blob not NULL,
+    Bilder blob not NULL,
+    startDate text not null,
+    endDate text default NULL,
+    InfoText text DEFAULT NULL);
+
+Create TABLE Preise(
+    Pid integer PRIMARY KEY,
+    Vid REFERENCES veranstaltung(VID) not null,
+    klasse text not null,
+    Preis real not null,
+    anzahl integer not null,
+    VStart text not null);
+
+CREATE TABLE Künstler(
+    KID integer PRIMARY KEY,
+    Name text UNIQUE not NULL,
+    Bild blob not null,
+    kurzText text not null,
+    bilderreihe blob not null,
+    langText text DEFAULT NULL);
+
+CREATE TABLE Auftritt(
+    AID integer PRIMARY KEY,
+    Künstler REFERENCES Künstler(KID) not null,
+    Veranstaltung REFERENCES Veranstaltung(VID) not null);

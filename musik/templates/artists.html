@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+This is the ticket table
+{% endblock %}
+
+{% block content %}
+    {% for item in items%}
+    <div style="height: 75vh;width: 75vh;background-color: transpatrent;margin: auto;margin-bottom: 3em;">
+        <p>
+          <a class="btn btn-primary" data-bs-toggle="collapse" href="#{{item[0]}}" role="button" aria-expanded="false" aria-controls="{{item[0]}}" style="background-color: #00000000;border:0;font-size: 1.5em;margin: 0;text-shadow: 2px 2px 4px #000000;">
+            {{item[1]}}<br><img src="{{item[2]}}" alt="" style="height: 75vh;width: 75vh;object-fit: cover;border-radius: 6%;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+          </a>
+        </p>
+        <div class="collapse" id="{{item[0]}}">
+          <div class="card card-body">
+            {{item[3]|safe}}
+          </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% for user in users%}
+        <ul>
+            <li>{{user[0]}}</li>
+            <li>{{user[1]}}</li>
+            <li>{{user[2]}}</li>
+            <li>{{user[3]}}</li>
+        </ul>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Login Page
+{% endblock %}
+
+{% block content %}
+<body class="text-center">
+<div class="container">
+<form method="POST" class="form-register" action="/add_artist" style="color:black">
+
+    <br>
+    <img class="mb-4" src="images/Logo.png"  style="width:200px">
+    <br>
+    <h1 class="h3 mb-3 font-weight-normal">
+        Please Enter Artist
+    </h1>
+
+    <label for="Name" class="form-label">Name</label>
+    <input type="text" id="Name" name="Name" class="form-control">
+    <label for="Image" class="form-label">Image URL</label>
+    <input type="text" id="Image" name="Image" class="form-control">
+    <label for="Description" class="form-label">Description</label>
+    <textarea class="form-control" id="Description" name="Description" rows="3"></textarea>
+
+    <br>
+    <button type="submit" class="btn btn-dark">Enter</button>
+
+</form>
+</div>
+</body>
+
+{% endblock %}
