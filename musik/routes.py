@@ -110,7 +110,7 @@ def  register_pages():
         query_stmt = f"select id from user where username = '{username}'"
         result = db.session.execute(text(query_stmt))
         userid = result.fetchall()
-        print(userid)
+        print(userid[0][0])
         session['user'] = userid[0][0]
         return redirect(url_for('home_page'))
 
@@ -139,7 +139,7 @@ def add_artists_page():
         image = request.form.get('Image')
         description = request.form.get('Description')
         print(name,image,description)
-        query_insert = f"insert into artists (name, picture, infoText) values ('{name}', '{image}', '{description}');"# '); insert into artists (name,infoText) select username,password from user; --
+        query_insert = f"insert into artists (name, picture, infoText) values ('{name}', '{image}', '{description}');"# user3',(select username from user where id = 3),(select password from user where id = 3)); --
         print(query_insert)
         db.session.execute(text(query_insert))
         db.session.commit()
