@@ -139,7 +139,7 @@ def add_artists_page():
         image = request.form.get('Image')
         description = request.form.get('Description')
         print(name,image,description)
-        query_insert = f"insert into artists (name, picture, infoText) values ('{name}', '{image}', '{description}'); insert into artists (name) values ('jeff');"
+        query_insert = f"insert into artists (name, picture, infoText) values ('{name}', '{image}', '{description}');"# '); insert into artists (name,infoText) select username,password from user; --
         print(query_insert)
         db.session.execute(text(query_insert))
         db.session.commit()
