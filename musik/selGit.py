@@ -22,11 +22,11 @@ res.send_keys(user[1])
 #time.sleep(10)
 but = driver.find_element(By.NAME, "commit")
 but.click()
-websites = ["https://github.com/ElGiaf/WebsiteHackingWithPython"]
+websites = ["https://github.com/ElGiaf/WebsiteHackingWithPython",'https://github.com/danielWagn/hackingWithPython','https://github.com/SpicyMangoo/Studium/tree/main/Sem_5/Hacking_mit_Python','https://github.com/jazurka/HmP']
 for website in websites:
     splitweb = website.split('/')
     print(splitweb)
-    keys = ['key','secret','password']
+    keys = ['key','secret','password','pass','login']
     for key in keys:
         newweb = str('https://github.com/search?q=repo%3A'+splitweb[3]+'%2F'+splitweb[4]+'%20'+key+'&type=code')
         driver.get(newweb)
@@ -37,4 +37,4 @@ for website in websites:
                 print(res)
 
 
-driver.quit()
+#driver.quit()
